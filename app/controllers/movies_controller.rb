@@ -10,6 +10,11 @@ class MoviesController < ApplicationController
       @ratings_to_show = Movie.all_ratings
     end
     @movies = Movie.with_ratings(@ratings_to_show)
+    if params[:sort_by] == "title"
+      @movies = @movies.sort_by(&:title)
+    elsif params[:sort_by] == "release_date"
+      @movies = @movies.sort_by(&:release_date)
+    end
   end
 
   # GET /movies/1 or /movies/1.json
